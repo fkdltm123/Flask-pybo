@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData  # SQLite 데이터베이스를 플라스크 ORM에서 정상으로 사용하기 위한 것
-import config
 from flaskext.markdown import Markdown
 
 naming_convention = {
@@ -17,7 +16,7 @@ migrate = Migrate()
 
 def create_app():
         app = Flask(__name__)
-        app.config.from_object(config)
+        app.config.from_envvar('APP_CONFIG_FILE')
 
         # ORM
         db.init_app(app)
